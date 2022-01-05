@@ -1,20 +1,21 @@
 class TwoSum {
     class Solution {
-        fun twoSum(nums: IntArray, target: Int): IntArray {
-            val compList = mutableListOf<Int>()
-            val givenList = nums.toList()
+        fun twoSum(array: MutableList<Int>, targetSum: Int): List<Int> {
+            val complementNumbersArray = mutableListOf<Int>()
 
-            val result = mutableListOf<Int>()
-            for (i in givenList.indices) {
-                if (compList.contains(givenList[i])) {
-                    val compValueIndex = compList.indexOf(givenList[i])
-                    result.add(compValueIndex)
-                    result.add(i)
+            for (i in 0 until array.size) {
+                if (isAlreadyPresent(complementNumbersArray, array[i])) {
+                    return listOf(array[i], targetSum - array[i])
                 } else {
-                    compList.add(target - givenList[i])
+                    complementNumbersArray.add(targetSum - array[i])
                 }
             }
-            return result.toIntArray()
+
+            return listOf()
+        }
+
+        private fun isAlreadyPresent(array: MutableList<Int>, currentValue: Int): Boolean {
+            return array.contains(currentValue)
         }
     }
 }
